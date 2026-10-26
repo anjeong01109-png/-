@@ -1,0 +1,13 @@
+# GitHub Pages 설정: drafts 폴더의 초안만 웹페이지로 공개합니다
+title: 콘텐츠 마케팅 리서치 초안
+description: 네이버 API 데이터로 만든 블로그·콘텐츠 초안 모음
+theme: jekyll-theme-cayman
+lang: ko
+
+# 웹페이지로 만들지 않을 파일 (저장소에는 그대로 남음)
+exclude:
+  - CLAUDE.md
+  - analysis/
+  - tools/
+  - secrets/
+  - output/
