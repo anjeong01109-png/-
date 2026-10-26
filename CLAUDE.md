@@ -12,7 +12,7 @@
 정균\
 ├─ CLAUDE.md                  이 문서
 ├─ .gitignore                 비밀 파일과 결과물 제외 (GitHub 업로드 제외 목록)
-├─ .env                       API 키 모음: 네이버·카카오 (공유·업로드 금지)
+├─ .env                       API 키 모음: 네이버·Amplitude (공유·업로드 금지)
 ├─ tools\                     재사용하는 실행 도구
 │   ├─ load-env.ps1           .env에서 키를 읽는 공통 도구
 │   ├─ naver-topic.ps1        주제 하나를 빠르게 조사 (여러 채널 한 번에)
@@ -44,7 +44,7 @@
 ## 2. API 사용 규칙
 
 ### 인증과 비밀 정보 (가장 중요)
-- 모든 API 키는 **프로젝트 폴더의 `.env`에만** 둡니다 (`NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET`, `NAVER_BASE_URL`, `KAKAO_REST_API_KEY`, `KAKAO_CLIENT_SECRET`). 코드, 문서, 보고서, 채팅 답변에 **절대 값을 적지 않습니다.**
+- 모든 API 키는 **프로젝트 폴더의 `.env`에만** 둡니다 (`NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET`, `NAVER_BASE_URL`, `AMPLITUDE_API_KEY`, `AMPLITUDE_SECRET_KEY`). 코드, 문서, 보고서, 채팅 답변에 **절대 값을 적지 않습니다.**
 - 스크립트는 키를 직접 읽지 않고 `tools\load-env.ps1`(`Get-NaverConfig`, `Import-DotEnv`)로 읽습니다.
 - `.env`는 `.gitignore`로 GitHub 업로드에서 제외됩니다. 커밋 전에 `.env`가 목록에 없는지 확인합니다.
 - ⚠ 이 폴더는 **OneDrive(클라우드 동기화) 안**에 있습니다. 비밀 파일이 클라우드에 올라간다는 뜻이므로, 다음 중 하나를 결정해야 합니다. `[확정 필요]`

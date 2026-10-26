@@ -4,7 +4,7 @@
   사용 예 (다른 .ps1 안에서):
     . (Join-Path $root 'tools\load-env.ps1')
     $config = Get-NaverConfig $root     # clientId / clientSecret / baseUrl
-    $envs   = Import-DotEnv $root       # .env 전체 (예: $envs.KAKAO_REST_API_KEY)
+    $envs   = Import-DotEnv $root       # .env 전체 (예: $envs.AMPLITUDE_API_KEY)
 
   키 위치: 프로젝트 폴더의 .env (GitHub 업로드 제외)
 #>

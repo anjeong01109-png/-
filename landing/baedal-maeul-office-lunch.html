@@ -842,5 +842,111 @@
     document.getElementById('formDone').style.display = 'block';
   });
 </script>
+<!-- CTA 노출·클릭 수집 (Amplitude HTTP API로 전송)
+  - 노출(CTA Impression): CTA가 화면에 50% 이상, 1초 이상 보이면 페이지 방문당 CTA별 1번
+  - 클릭(CTA Click): data-cta가 붙은 버튼·링크를 누를 때마다
+  - 이벤트 속성: cta_id, cta_label, cta_section, page_path, utm_source/medium/campaign, viewport, is_test
+  - AMPLITUDE_API_KEY가 비어 있으면 전송하지 않고 브라우저 콘솔에만 기록
+  - 확인용: 브라우저 콘솔에서 ctaTracker.counts() 입력 -->
+<script>
+(function () {
+  const AMPLITUDE_API_KEY = '__AMPLITUDE_API_KEY__';
+  const ENDPOINT = 'https://api2.amplitude.com/2/httpapi';
+  const VIEW_RATIO = 0.5, VIEW_MS = 1000;
+
+  const keyReady = AMPLITUDE_API_KEY && AMPLITUDE_API_KEY.indexOf('__') !== 0;
+  const params = new URLSearchParams(location.search);
+  const isTest = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) || params.has('cta_test');
+  const sessionId = Date.now();
+  let deviceId;
+  try {
+    deviceId = localStorage.getItem('cta_device_id');
+    if (!deviceId) { deviceId = 'd-' + Math.random().toString(36).slice(2) + sessionId.toString(36); localStorage.setItem('cta_device_id', deviceId); }
+  } catch (e) { deviceId = 'd-' + Math.random().toString(36).slice(2) + sessionId.toString(36); }
+
+  const counts = {};   // { cta_id: { impressions, clicks } }
+  const sent = [];     // 전송 결과 기록 (테스트 확인용)
+  let queue = [];
+
+  function sectionOf(el) {
+    if (el.closest('header')) return 'header';
+    if (el.closest('.sticky-cta')) return 'sticky-bar';
+    const s = el.closest('section');
+    return (s && s.id) || (s && s.className.split(' ')[0]) || 'unknown';
+  }
+  function bump(id, kind) {
+    counts[id] = counts[id] || { impressions: 0, clicks: 0 };
+    counts[id][kind]++;
+  }
+  function track(type, el) {
+    const id = el.dataset.cta;
+    bump(id, type === 'CTA Impression' ? 'impressions' : 'clicks');
+    queue.push({
+      event_type: type,
+      device_id: deviceId,
+      session_id: sessionId,
+      time: Date.now(),
+      event_properties: {
+        cta_id: id,
+        cta_label: el.textContent.replace(/\s+/g, ' ').trim().slice(0, 60),
+        cta_section: sectionOf(el),
+        page_path: location.pathname,
+        utm_source: params.get('utm_source') || 'direct',
+        utm_medium: params.get('utm_medium') || '',
+        utm_campaign: params.get('utm_campaign') || '',
+        viewport: innerWidth <= 900 ? 'mobile' : 'desktop',
+        is_test: isTest
+      }
+    });
+    if (type === 'CTA Click') flush(true);
+  }
+  function flush(keepalive) {
+    if (!queue.length) return;
+    const events = queue; queue = [];
+    if (!keyReady) { console.info('[cta] API 키 없음, 전송 생략', events); sent.push({ status: 'no-key', count: events.length }); return; }
+    fetch(ENDPOINT, {
+      method: 'POST', keepalive: !!keepalive,
+      headers: { 'Content-Type': 'application/json', 'Accept': '*/*' },
+      body: JSON.stringify({ api_key: AMPLITUDE_API_KEY, events: events })
+    }).then(r => r.json().then(b => sent.push({ status: r.status, count: events.length, body: b })))
+      .catch(err => { sent.push({ status: 'error', count: events.length, error: String(err) }); queue = events.concat(queue); });
+  }
+
+  // 노출: 50% 이상 1초 유지 시 CTA별 1회
+  const timers = new Map(), seen = new Set();
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      const id = e.target.dataset.cta;
+      if (seen.has(id)) return;
+      if (e.isIntersecting && e.intersectionRatio >= VIEW_RATIO) {
+        if (!timers.has(e.target)) timers.set(e.target, setTimeout(() => {
+          seen.add(id); io.unobserve(e.target); timers.delete(e.target);
+          track('CTA Impression', e.target);
+        }, VIEW_MS));
+      } else if (timers.has(e.target)) { clearTimeout(timers.get(e.target)); timers.delete(e.target); }
+    });
+  }, { threshold: [0, VIEW_RATIO, 1] });
+  document.querySelectorAll('[data-cta]').forEach(el => io.observe(el));
+
+  // 클릭: 누를 때마다
+  document.addEventListener('click', e => {
+    const el = e.target.closest('[data-cta]');
+    if (el) track('CTA Click', el);
+  }, true);
+
+  setInterval(() => flush(false), 3000);
+  addEventListener('pagehide', () => flush(true));
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(true); });
+
+  window.ctaTracker = {
+    counts: () => JSON.parse(JSON.stringify(counts)),
+    sent: () => sent.slice(),
+    flush: () => flush(false),
+    keyReady: keyReady,
+    isTest: isTest
+  };
+})();
+</script>
+
 </body>
 </html>
