@@ -1,0 +1,11 @@
+# API 키 - 절대 업로드 금지
+secrets/
+*.json.bak
+
+# 분석 결과물 (스크립트로 다시 만들 수 있음)
+output/
+
+# 윈도우·오피스 임시 파일
+Thumbs.db
+desktop.ini
+~$*
