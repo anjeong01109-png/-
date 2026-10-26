@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>배달의 마을 오피스런치 | 우리 회사 점심, 이제 정기구독으로</title>
+<meta name="description" content="회사에서 도시락 드시는 팀을 위한 배달의 마을 오피스런치. 정기 구독 런치와 회의·야근·사내행사 패키지를 기존 고객 전용 혜택으로 만나보세요.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mint: #4C8C3F;
+    --mint-dark: #36692C;
+    --mint-soft: #EAF3E4;
+    --ink: #1F2328;
+    --ink-sub: #5B636B;
+    --line: #E4E8EB;
+    --bg: #FFFFFF;
+    --bg-alt: #F6F8F9;
+    --accent: #FF6B4A;
+    --card: #FFFFFF;
+    --shadow: 0 10px 30px rgba(20, 40, 50, .08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --mint-soft: #1F3320; --ink: #EEF2F3; --ink-sub: #A7B0B6; --line: #2C3438;
+      --bg: #121618; --bg-alt: #181E21; --card: #1D2427; --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --mint-soft: #1F3320; --ink: #EEF2F3; --ink-sub: #A7B0B6; --line: #2C3438;
+    --bg: #121618; --bg-alt: #181E21; --card: #1D2427; --shadow: 0 10px 30px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: "Noto Sans KR", system-ui, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; word-break: keep-all; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+  .display { font-family: "Black Han Sans", "Noto Sans KR", sans-serif; font-weight: 400; letter-spacing: -0.5px; }
+  section { padding: 88px 0; }
+  .alt { background: var(--bg-alt); }
+  .eyebrow { display: inline-block; color: var(--mint-dark); font-weight: 700; font-size: 14px; letter-spacing: .5px; margin-bottom: 10px; }
+  .sec-title { font-size: clamp(30px, 5vw, 44px); line-height: 1.25; margin-bottom: 14px; }
+  .sec-desc { color: var(--ink-sub); font-size: 17px; max-width: 640px; }
+  .center { text-align: center; }
+  .center .sec-desc { margin: 0 auto; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 16px 28px; border-radius: 14px; font-weight: 700; font-size: 17px; border: 0; cursor: pointer; transition: transform .15s, background .15s; }
+  .btn:active { transform: scale(.98); }
+  .btn-primary { background: var(--mint); color: #fff; }
+  .btn-primary:hover { background: var(--mint-dark); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 2px solid var(--line); }
+  .btn-ghost:hover { border-color: var(--mint); color: var(--mint-dark); }
+
+  /* 헤더 */
+  header { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-size: 26px; color: var(--mint); }
+  .logo small { font-family: "Noto Sans KR"; font-size: 13px; color: var(--ink-sub); margin-left: 6px; font-weight: 500; }
+  .nav-links { display: flex; gap: 28px; font-weight: 500; font-size: 15px; }
+  .nav-links a:hover { color: var(--mint-dark); }
+  .nav .btn { padding: 10px 18px; font-size: 15px; }
+
+  /* 학습용 가상 브랜드 안내 띠 */
+  .demo-bar { background: #FFF4C2; color: #5A4500; text-align: center; font-size: 13px; font-weight: 700; padding: 8px 16px; }
+  .demo-note { background: #FFF4C2; color: #5A4500; border-radius: 12px; padding: 10px 12px; font-size: 13px; font-weight: 500; }
+
+  /* 채널 맞춤 띠배너 */
+  .channel-bar { background: var(--ink); color: #fff; text-align: center; font-size: 14px; padding: 10px 16px; }
+  :root[data-theme="dark"] .channel-bar { background: #000; }
+  .channel-bar b { color: var(--mint); }
+
+  /* 히어로 */
+  .hero { padding: 72px 0 88px; background: linear-gradient(180deg, var(--mint-soft), var(--bg)); overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1px solid var(--line); padding: 7px 14px; border-radius: 999px; font-size: 14px; font-weight: 700; margin-bottom: 22px; }
+  .badge .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+  .hero h1 { font-size: clamp(40px, 7vw, 68px); line-height: 1.15; margin-bottom: 20px; }
+  .hero h1 em { font-style: normal; color: var(--mint); }
+  .hero p.lead { font-size: 19px; color: var(--ink-sub); margin-bottom: 32px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: -12px 0 26px; }
+  .chip { background: var(--card); border: 1.5px solid var(--mint); color: var(--ink); padding: 6px 12px; border-radius: 999px; font-size: 14px; }
+  .chip b { color: var(--mint-dark); }
+  .result .row small { display: block; font-size: 12px; color: var(--ink-sub); font-weight: 400; }
+  .result .row b { white-space: nowrap; }
+  .result .btn { width: 100%; }
+  .first-row { margin-top: 12px; background: var(--card); border-radius: 12px; padding: 10px 14px; font-size: 14px; }
+  .first-row b { color: var(--accent); white-space: nowrap; }
+  @media (max-width: 900px) { .result { padding: 22px 16px; } }
+  .bento-ill { width: 100%; height: auto; display: block; margin-bottom: 16px; }
+  .pkg-ill { width: 100%; max-width: 360px; height: auto; display: block; margin-bottom: 18px; }
+  /* 금액대별 할인: 계단식으로 커지는 막대 → "많이 주문할수록 더 할인" 시각화 */
+  .tier-row { align-items: end; }
+  .tier:nth-child(1) { padding-top: 14px; }
+  .tier:nth-child(2) { padding-top: 30px; }
+  .tier:nth-child(3) { padding-top: 48px; }
+  .tier-axis { display: flex; justify-content: space-between; font-size: 12px; color: #B9C2C8; margin-top: 8px; }
+  .first-month { margin-top: 6px; font-size: 14px; color: var(--accent); font-weight: 700; }
+  .benefit-strip { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; background: var(--mint-soft); border-radius: 16px; padding: 14px 18px; font-size: 14px; font-weight: 500; }
+  .benefit-strip b { color: var(--mint-dark); }
+  .sticky-cta { flex-wrap: wrap; width: 100%; max-width: 100vw; }
+  .sticky-cta > * { min-width: 0; }
+  /* 세로가 짧은 폴더폰·가로모드: 고정 바를 한 줄로 줄여 본문 가림 최소화 */
+  @media (max-height: 480px) {
+    .sticky-cta .sticky-note { display: none; }
+    .sticky-cta { padding-top: 8px; padding-bottom: 8px; }
+    .sticky-cta .btn { padding: 10px; font-size: 14px; }
+  }
+  .sticky-cta .sticky-note { flex-basis: 100%; text-align: center; font-size: 12px; color: var(--ink-sub); }
+  .sticky-cta .sticky-note b { color: var(--mint-dark); }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+  .hero-proof { display: flex; gap: 28px; flex-wrap: wrap; }
+  .hero-proof div { font-size: 14px; color: var(--ink-sub); }
+  .hero-proof strong { display: block; font-size: 26px; color: var(--ink); font-family: "Black Han Sans"; font-weight: 400; }
+
+  .lunchbox { position: relative; background: var(--card); border-radius: 28px; padding: 28px; box-shadow: var(--shadow); border: 1px solid var(--line); }
+  .lunchbox h3 { font-size: 15px; color: var(--ink-sub); font-weight: 500; margin-bottom: 14px; }
+  .week { display: grid; gap: 10px; }
+  .day { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 14px; background: var(--bg-alt); }
+  .day .d { width: 40px; height: 40px; border-radius: 12px; background: var(--mint); color: #fff; display: grid; place-items: center; font-weight: 700; flex-shrink: 0; }
+  .day .m { flex: 1; font-weight: 500; font-size: 15px; }
+  .day .m span { display: block; font-size: 13px; color: var(--ink-sub); font-weight: 400; }
+  .day .ok { font-size: 13px; color: var(--mint-dark); font-weight: 700; }
+  .float-tag { position: absolute; top: -16px; left: 20px; background: var(--accent); color: #fff; font-weight: 700; padding: 8px 14px; border-radius: 12px; font-size: 14px; transform: rotate(4deg); }
+
+  /* 페인포인트 */
+  .pains { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
+  .pain { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 28px; }
+  .pain .q { font-size: 22px; margin-bottom: 10px; }
+  .pain p { color: var(--ink-sub); font-size: 15px; }
+  .pain .a { margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--line); font-weight: 700; color: var(--mint-dark); font-size: 15px; }
+
+  /* 구독 */
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+  .plan { position: relative; background: var(--card); border: 2px solid var(--line); border-radius: 24px; padding: 32px 28px; display: flex; flex-direction: column; }
+  .plan.best { border-color: var(--mint); box-shadow: var(--shadow); }
+  .plan .ribbon { position: absolute; top: -14px; left: 28px; background: var(--mint); color: #fff; font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 8px; }
+  .plan h3 { font-size: 26px; margin-bottom: 4px; }
+  .plan .for { color: var(--ink-sub); font-size: 14px; margin-bottom: 20px; }
+  .plan .price { font-size: 15px; color: var(--ink-sub); }
+  .plan .price s { margin-right: 6px; }
+  .plan .price b { font-size: 34px; color: var(--ink); font-family: "Black Han Sans"; font-weight: 400; }
+  .plan ul { list-style: none; margin: 22px 0 28px; display: grid; gap: 10px; font-size: 15px; flex: 1; }
+  .plan li::before { content: "✓"; color: var(--mint); font-weight: 900; margin-right: 8px; }
+  .plan .btn { width: 100%; }
+  .note { font-size: 13px; color: var(--ink-sub); margin-top: 18px; text-align: center; }
+
+  /* 패키지 탭 */
+  .tabs { display: flex; gap: 10px; margin: 40px 0 24px; flex-wrap: wrap; justify-content: center; }
+  .tab { padding: 12px 22px; border-radius: 999px; border: 2px solid var(--line); background: var(--card); color: var(--ink); font-weight: 700; font-size: 16px; cursor: pointer; font-family: inherit; }
+  .tab[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .panel { display: none; grid-template-columns: 1fr 1fr; gap: 32px; background: var(--card); border: 1px solid var(--line); border-radius: 28px; padding: 40px; box-shadow: var(--shadow); }
+  .panel.active { display: grid; }
+  .panel .emoji { font-size: 48px; margin-bottom: 8px; }
+  .panel h3 { font-size: 32px; margin-bottom: 10px; }
+  .panel .who { color: var(--ink-sub); margin-bottom: 20px; }
+  .panel .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .panel .tags span { background: var(--mint-soft); color: var(--mint-dark); padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: 700; }
+  .menu-list { display: grid; gap: 12px; }
+  .menu-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 18px; background: var(--bg-alt); border-radius: 16px; }
+  .menu-item b { display: block; font-size: 16px; }
+  .menu-item span { font-size: 13px; color: var(--ink-sub); }
+  .menu-item .p { font-weight: 700; white-space: nowrap; }
+
+  /* 이용 방법 */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; counter-reset: step; }
+  .step { position: relative; padding: 28px 22px; background: var(--card); border: 1px solid var(--line); border-radius: 20px; }
+  .step::before { counter-increment: step; content: counter(step); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--mint); color: #fff; font-weight: 900; margin-bottom: 14px; }
+  .step h4 { font-size: 18px; margin-bottom: 6px; }
+  .step p { color: var(--ink-sub); font-size: 14px; }
+
+  /* 기존 고객 혜택 */
+  .loyal { background: var(--ink); color: #fff; border-radius: 32px; padding: 56px 48px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: center; }
+  :root[data-theme="dark"] .loyal, :root:not([data-theme="light"]) .loyal { }
+  .loyal .sec-title { color: #fff; }
+  .loyal .sec-desc { color: #B9C2C8; }
+  .loyal .eyebrow { color: var(--mint); }
+  .perks { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .perk { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 20px; }
+  .perk b { display: block; font-size: 17px; margin-bottom: 4px; color: #fff; }
+  .perk span { font-size: 14px; color: #B9C2C8; }
+  .perk .big { font-family: "Black Han Sans"; color: var(--mint); font-size: 30px; display: block; line-height: 1.1; margin-bottom: 6px; }
+  .tiers { grid-column: 1 / -1; background: rgba(76,140,63,.12); border: 1px solid rgba(76,140,63,.4); border-radius: 18px; padding: 20px; }
+  .tiers > b { display: block; font-size: 17px; margin-bottom: 4px; color: #fff; }
+  .tiers > span { font-size: 14px; color: #B9C2C8; }
+  .tier-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+  .tier { background: rgba(255,255,255,.06); border-radius: 14px; padding: 14px 10px; text-align: center; }
+  .tier small { display: block; font-size: 13px; color: #B9C2C8; }
+  .tier strong { display: block; font-family: "Black Han Sans"; font-weight: 400; font-size: 28px; color: var(--mint); line-height: 1.2; }
+  .tier:last-child { background: var(--mint); }
+  .tier:last-child small, .tier:last-child strong { color: #fff; }
+
+  /* 계산기 */
+  .calc { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 44px; background: var(--card); border: 1px solid var(--line); border-radius: 28px; padding: 40px; }
+  .field { margin-bottom: 26px; }
+  .field label { display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 10px; }
+  .field label output { color: var(--mint-dark); }
+  input[type=range] { width: 100%; accent-color: var(--mint); height: 6px; }
+  .seg { display: flex; gap: 8px; flex-wrap: wrap; }
+  .seg button { flex: 1; min-width: 70px; padding: 12px; border-radius: 12px; border: 2px solid var(--line); background: var(--bg); color: var(--ink); font-weight: 700; cursor: pointer; font-family: inherit; }
+  .seg button.on { border-color: var(--mint); background: var(--mint-soft); color: var(--mint-dark); }
+  .result { background: var(--mint-soft); border-radius: 20px; padding: 32px; display: flex; flex-direction: column; justify-content: center; }
+  .result .row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid color-mix(in srgb, var(--mint) 25%, transparent); font-size: 15px; }
+  .result .row:last-of-type { border: 0; }
+  .result .save { margin-top: 18px; font-size: 15px; }
+  .result .save b { display: block; font-family: "Black Han Sans"; font-weight: 400; font-size: 40px; color: var(--mint-dark); line-height: 1.2; }
+
+  /* 후기 */
+  .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
+  .review { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 28px; }
+  .review .stars { color: #FFB800; letter-spacing: 2px; margin-bottom: 12px; }
+  .review p { font-size: 15px; margin-bottom: 18px; }
+  .review .by { font-size: 14px; color: var(--ink-sub); }
+  .review .by b { color: var(--ink); }
+
+  /* FAQ */
+  .faq { max-width: 760px; margin: 40px auto 0; }
+  details { border-bottom: 1px solid var(--line); padding: 20px 4px; }
+  summary { cursor: pointer; font-weight: 700; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--mint); font-size: 24px; line-height: 1; }
+  details[open] summary::after { content: "−"; }
+  details p { color: var(--ink-sub); margin-top: 12px; font-size: 15px; }
+
+  /* 상담 폼 */
+  .cta-box { background: linear-gradient(135deg, var(--mint), var(--mint-dark)); color: #fff; border-radius: 32px; padding: 56px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .cta-box .sec-title { color: #fff; }
+  .cta-box p { opacity: .92; }
+  .cta-box ul { list-style: none; margin-top: 22px; display: grid; gap: 8px; }
+  .cta-box li::before { content: "✓ "; font-weight: 900; }
+  form { background: #fff; color: #1F2328; border-radius: 22px; padding: 28px; display: grid; gap: 14px; }
+  form label { font-size: 14px; font-weight: 700; display: grid; gap: 6px; }
+  form input, form select { font: inherit; padding: 13px 14px; border: 1.5px solid #E4E8EB; border-radius: 12px; background: #fff; color: #1F2328; }
+  form input:focus, form select:focus { outline: none; border-color: var(--mint); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .agree { display: flex !important; grid-template-columns: none; align-items: center; gap: 8px; font-weight: 400 !important; font-size: 13px !important; color: #5B636B; }
+  .agree input { width: 18px; height: 18px; padding: 0; accent-color: var(--mint); }
+  .form-done { display: none; text-align: center; padding: 30px 10px; }
+  .form-done b { font-family: "Black Han Sans"; font-size: 30px; font-weight: 400; color: var(--mint-dark); display: block; margin-bottom: 8px; }
+
+  footer { padding: 40px 0 120px; color: var(--ink-sub); font-size: 13px; border-top: 1px solid var(--line); }
+
+  /* 모바일 하단 고정 CTA */
+  .sticky-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: var(--bg); border-top: 1px solid var(--line); display: none; gap: 10px; }
+  .sticky-cta .btn { flex: 1; padding: 14px; font-size: 16px; }
+
+  @media (max-width: 900px) {
+    section { padding: 64px 0; }
+    .nav-links { display: none; }
+    .hero-grid, .panel, .calc, .loyal, .cta-box { grid-template-columns: 1fr; }
+    .pains, .plans, .reviews { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .panel, .calc { padding: 28px 22px; }
+    .loyal, .cta-box { padding: 40px 22px; border-radius: 24px; }
+    .sticky-cta { display: flex; }
+  }
+  @media (max-width: 480px) {
+    .two { grid-template-columns: 1fr; }
+    .perks { gap: 10px; }
+    .perk { padding: 14px 12px; }
+    .perk .big { font-size: 24px; }
+    .perk b { font-size: 15px; }
+    .perk span { font-size: 12.5px; }
+    .tier strong { font-size: 22px; }
+    .steps { grid-template-columns: 1fr; }
+    .hero-cta .btn { width: 100%; }
+  }
+
+  /* 반응형 보강: 그리드 자식이 화면 밖으로 밀리지 않게 */
+  .hero-grid > *, .panel > *, .calc > *, .loyal > *, .cta-box > *, .two > * { min-width: 0; }
+  form input, form select { width: 100%; min-width: 0; }
+  .logo { white-space: nowrap; }
+  .btn-short { display: none; }
+  .sec-cta { margin-top: 28px; }
+  .sticky-cta { transition: transform .25s; }
+  .sticky-cta.hide { transform: translateY(110%); }
+  @media (max-width: 600px) {
+    .logo small { display: none; }
+    .nav .btn { padding: 9px 14px; font-size: 14px; }
+    .nav .btn .btn-long { display: none; }
+    .nav .btn .btn-short { display: inline; }
+  }
+  /* 폴더블 접힘·소형폰·폴더폰 (≤360px) */
+  @media (max-width: 360px) {
+    .wrap { padding: 0 12px; }
+    section { padding: 48px 0; }
+    .hero { padding: 40px 0 56px; }
+    .hero h1 { font-size: 31px; }
+    .hero p.lead { font-size: 16px; }
+    .sec-title { font-size: 25px; }
+    .sec-desc { font-size: 15px; }
+    .btn { padding: 14px 16px; font-size: 15px; }
+    .panel, .calc { padding: 22px 14px; border-radius: 20px; }
+    .loyal, .cta-box { padding: 32px 14px; border-radius: 20px; }
+    .plan { padding: 28px 16px; }
+    .pain { padding: 20px 16px; }
+    .tier-row { grid-template-columns: 1fr; }
+    .tier:nth-child(n) { padding-top: 14px; }
+    .panel h3 { font-size: 24px; }
+    .plan h3 { font-size: 22px; }
+    .loyal .perk .big { font-size: 22px; }
+    .tier-axis { display: none; }
+    .perks { grid-template-columns: 1fr; }
+    .hero-proof { gap: 14px; }
+    .hero-proof strong { font-size: 21px; }
+    .channel-bar { font-size: 12px; padding: 8px 12px; }
+    .nav { height: 54px; }
+    .logo { font-size: 21px; }
+    .lunchbox { padding: 18px 12px; border-radius: 20px; }
+    .day { padding: 10px; gap: 10px; }
+    .day .ok { display: none; }
+    form { padding: 16px; }
+    .sticky-cta { padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); }
+    .sticky-cta .btn-ghost { display: none; }
+  }
+  @media (max-width: 300px) {
+    .nav .btn { display: none; } /* 하단 고정 CTA가 대신함 */
+    .hero h1 { font-size: 27px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-bar">학습용 가상 브랜드 시안입니다 · 실제 서비스·회사가 아니며 배달의민족과 관계없습니다</div>
+
+<!-- 0. 유입 채널 맞춤 띠배너 (utm_source 로 문구 변경) -->
+<div class="channel-bar"><span id="channelBar">🍱 <b>기존 오피스 고객 전용</b></span> · 첫 달 <b>20%</b> + 주문 금액별 최대 <b>10%</b> 추가 할인</div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo display">배달의 마을 오피스런치<small>for Business</small></a>
+    <nav class="nav-links">
+      <a href="#subscribe">정기 구독</a>
+      <a href="#packages">상황별 패키지</a>
+      <a href="#benefit">기존 고객 혜택</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#contact" class="btn btn-primary" data-cta="header"><span class="btn-long">혜택 받고 시작하기</span><span class="btn-short">할인 받기</span></a>
+  </div>
+</header>
+
+<!-- 1. 히어로 -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="badge"><span class="dot"></span><span id="heroBadge">늘 배달의 마을로 점심 주문하시던 팀이라면</span></span>
+      <h1 class="display">"오늘 뭐 먹지?"<br>회사 점심 고민,<br><em>이제 구독으로 끝.</em></h1>
+      <p class="lead">매일 도시락 주문하던 우리 팀, 이제 한 번만 설정하세요.<br>메뉴 추천부터 배달, 정산까지 배달의 마을이 알아서 챙깁니다.</p>
+      <div class="chips" aria-label="기존 고객 혜택 요약">
+        <a href="#benefit" class="chip"><b>첫 달 20%</b> 할인</a>
+        <a href="#benefit" class="chip">주문 금액별 <b>최대 +10%</b></a>
+        <a href="#benefit" class="chip">패키지 <b>무료 업그레이드</b></a>
+      </div>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary" data-cta="hero">첫 달 20% 할인 받기 →</a>
+        <a href="#packages" class="btn btn-ghost" data-cta="hero-packages">상황별 패키지 보기</a>
+      </div>
+      <div class="hero-proof">
+        <div><strong>12:00 정시</strong>점심시간 도착 보장</div>
+        <div><strong>월 1회</strong>세금계산서 일괄 정산</div>
+        <div><strong>5명부터</strong>소규모 팀도 OK</div>
+      </div>
+    </div>
+    <div class="lunchbox" aria-label="정기구독 주간 식단 예시">
+      <span class="float-tag">이번 주 식단 자동 완성!</span>
+      <svg class="bento-ill" viewBox="0 0 320 160" role="img" aria-label="밥과 계란말이, 채소, 고기 반찬이 담긴 도시락과 첫 달 20% 할인 스티커">
+        <rect x="8" y="16" width="290" height="136" rx="20" fill="#2F3438"/>
+        <rect x="20" y="28" width="128" height="112" rx="12" fill="#FFFFFF"/>
+        <g fill="#E9ECEE"><ellipse cx="44" cy="50" rx="5" ry="3"/><ellipse cx="62" cy="62" rx="5" ry="3"/><ellipse cx="110" cy="52" rx="5" ry="3"/><ellipse cx="124" cy="96" rx="5" ry="3"/><ellipse cx="46" cy="110" rx="5" ry="3"/><ellipse cx="96" cy="122" rx="5" ry="3"/><ellipse cx="60" cy="88" rx="5" ry="3"/></g>
+        <circle cx="86" cy="84" r="11" fill="#E5484D"/><path d="M86 73 q4 -6 9 -5" stroke="#4E9A4E" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <rect x="156" y="28" width="130" height="50" rx="12" fill="#FFF3D1"/>
+        <g fill="#FFD25A" stroke="#F2B630" stroke-width="2"><rect x="166" y="38" width="32" height="30" rx="7"/><rect x="204" y="38" width="32" height="30" rx="7"/><rect x="242" y="38" width="32" height="30" rx="7"/></g>
+        <rect x="156" y="86" width="60" height="54" rx="12" fill="#E3F4DA"/>
+        <g fill="#4FAF5B"><circle cx="176" cy="106" r="9"/><circle cx="188" cy="100" r="8"/><circle cx="196" cy="114" r="9"/><circle cx="178" cy="122" r="7"/></g>
+        <rect x="224" y="86" width="62" height="54" rx="12" fill="#FBE1D6"/>
+        <g fill="#A55A35"><ellipse cx="244" cy="104" rx="13" ry="8" transform="rotate(-15 244 104)"/><ellipse cx="266" cy="112" rx="13" ry="8" transform="rotate(10 266 112)"/><ellipse cx="248" cy="126" rx="12" ry="7"/></g>
+        <circle cx="284" cy="32" r="31" fill="#FF6B4A"/>
+        <text x="284" y="28" text-anchor="middle" font-family="Noto Sans KR" font-weight="700" font-size="12" fill="#fff">첫 달</text>
+        <text x="284" y="48" text-anchor="middle" font-family="Black Han Sans" font-size="21" fill="#fff">-20%</text>
+      </svg>
+      <h3>🗓 우리 팀 이번 주 런치 (12명)</h3>
+      <div class="week">
+        <div class="day"><div class="d">월</div><div class="m">제육볶음 도시락<span>한식 · 지난달 팀 만족도 1위</span></div><div class="ok">배송 확정</div></div>
+        <div class="day"><div class="d">화</div><div class="m">연어 포케 &amp; 샐러드<span>건강식 · 2명 비건 옵션</span></div><div class="ok">배송 확정</div></div>
+        <div class="day"><div class="d">수</div><div class="m">돈카츠 정식<span>일식 · 수요 많은 메뉴</span></div><div class="ok">배송 확정</div></div>
+        <div class="day"><div class="d">목</div><div class="m">닭가슴살 덮밥<span>건강식</span></div><div class="ok">배송 확정</div></div>
+        <div class="day"><div class="d">금</div><div class="m">불고기 비빔밥<span>한식 · 금요일 인원 -3명 반영</span></div><div class="ok">배송 확정</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. 공감(페인포인트) -->
+<section>
+  <div class="wrap center">
+    <span class="eyebrow">PAIN POINT</span>
+    <h2 class="sec-title display">점심 주문 담당자님, 혹시 이러셨죠?</h2>
+    <p class="sec-desc">매일 반복되는 단체 주문, 생각보다 많은 시간이 들어갑니다.</p>
+    <div class="pains" style="text-align:left">
+      <div class="pain">
+        <div class="q display">😩 "메뉴 정하는 데만 30분"</div>
+        <p>단톡방 투표, 알레르기·식단 확인, 인원 취합까지 매일 같은 일의 반복.</p>
+        <div class="a">→ 팀 취향 데이터로 주간 식단 자동 추천</div>
+      </div>
+      <div class="pain">
+        <div class="q display">🧾 "영수증이 수십 장"</div>
+        <p>개별 결제, 법인카드 영수증 정리, 월말 정산 때마다 경영지원팀과 씨름.</p>
+        <div class="a">→ 월 1회 세금계산서 일괄 발행</div>
+      </div>
+      <div class="pain">
+        <div class="q display">⏰ "12시 넘어 도착하는 점심"</div>
+        <p>점심시간 피크에 몰리는 배달, 늦게 오면 팀 전체 점심시간이 줄어듭니다.</p>
+        <div class="a">→ 정기구독 고객 우선 배차 · 정시 도착</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. 정기 구독형 런치 서비스 -->
+<section class="alt" id="subscribe">
+  <div class="wrap center">
+    <span class="eyebrow">SERVICE 01 · 정기 구독형 런치</span>
+    <h2 class="sec-title display">우리 팀에 맞는 구독 플랜을 고르세요</h2>
+    <p class="sec-desc">요일·인원만 정하면 매주 식단이 자동으로 짜이고, 정해진 시간에 도착합니다. 인원 변동은 전날 오후 3시까지 앱에서 바로 수정.</p>
+    <div class="plans" style="text-align:left">
+      <div class="plan">
+        <h3 class="display">라이트</h3>
+        <div class="for">주 3회 · 5~19명 팀</div>
+        <div class="price"><s>9,500원</s><b>8,900원</b> /1인 1식</div>
+        <div class="first-month">첫 달 20% 적용 시 7,120원</div>
+        <ul>
+          <li>요일 자유 선택 (주 3회)</li>
+          <li>한식·양식·건강식 로테이션</li>
+          <li>월 1회 일괄 정산</li>
+          <li>전날 15시까지 인원 변경</li>
+          <li>구독 고객 패키지 10% 할인</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost" data-cta="plan-light" data-plan="라이트">라이트로 시작</a>
+      </div>
+      <div class="plan best">
+        <span class="ribbon">기존 고객 인기 No.1</span>
+        <h3 class="display">스탠다드</h3>
+        <div class="for">주 5회 · 10~49명 팀</div>
+        <div class="price"><s>9,500원</s><b>8,300원</b> /1인 1식</div>
+        <div class="first-month">첫 달 20% 적용 시 6,640원</div>
+        <ul>
+          <li>평일 매일 점심 자동 배송</li>
+          <li>AI 팀 취향 맞춤 식단</li>
+          <li>비건·알레르기 개별 옵션</li>
+          <li>정시 도착 보장 (지연 시 해당 회차 10% 환급)</li>
+          <li>구독 고객 패키지 10% 할인</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" data-cta="plan-standard" data-plan="스탠다드">스탠다드로 시작</a>
+      </div>
+      <div class="plan">
+        <h3 class="display">엔터프라이즈</h3>
+        <div class="for">주 5회 · 50명 이상</div>
+        <div class="price"><b>별도 견적</b></div>
+        <div class="first-month">첫 달 20% 동일 적용</div>
+        <ul>
+          <li>층별·부서별 분할 배송</li>
+          <li>전담 매니저 배정</li>
+          <li>사내 복지포인트·식권 연동</li>
+          <li>월간 식사 리포트 제공</li>
+          <li>구독 고객 패키지 10% 할인</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost" data-cta="plan-enterprise" data-plan="엔터프라이즈">견적 문의하기</a>
+      </div>
+    </div>
+    <div class="benefit-strip"><span>➕ 1회 주문 <b>5만 원↑ 3%</b> · <b>10만 원↑ 5%</b> · <b>20만 원↑ 10%</b> 추가 할인</span><span>모든 플랜 공통 적용</span></div>
+    <p class="note">* 가격은 예시이며, 지역·메뉴 구성에 따라 달라질 수 있습니다. 약정 없이 언제든 해지 가능.</p>
+  </div>
+</section>
+
+<!-- 4. 상황별 패키지 -->
+<section id="packages">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">SERVICE 02 · 상황별 패키지</span>
+      <h2 class="sec-title display">점심 말고도, 회사에서 먹는 모든 순간</h2>
+      <p class="sec-desc">회의, 야근, 사내 행사까지. 상황만 고르면 인원·시간·예산에 맞춰 한 번에 준비해 드립니다.</p>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-tab="meeting">📊 회의·세미나</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="night">🌙 야근 식대</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="event">🎉 사내 행사</button>
+    </div>
+
+    <div class="panel active" id="panel-meeting" role="tabpanel">
+      <div>
+        <svg class="pkg-ill" viewBox="0 0 260 150" role="img" aria-label="회의 테이블 위 노트북 옆에 개별 포장된 샌드위치 박스와 커피, 구독 고객 10% 할인 배지">
+          <rect width="260" height="150" rx="16" fill="#EAF3E4"/>
+          <rect x="20" y="96" width="220" height="12" rx="6" fill="#B98E62"/>
+          <rect x="36" y="108" width="8" height="30" fill="#9C7650"/><rect x="216" y="108" width="8" height="30" fill="#9C7650"/>
+          <rect x="28" y="56" width="58" height="38" rx="4" fill="#5B636B"/><rect x="32" y="60" width="50" height="30" rx="2" fill="#CFE9F7"/><rect x="22" y="92" width="70" height="5" rx="2" fill="#3A3F44"/>
+          <rect x="98" y="66" width="44" height="30" rx="4" fill="#E7C9A0"/><rect x="98" y="76" width="44" height="7" fill="#4C8C3F"/>
+          <rect x="146" y="66" width="44" height="30" rx="4" fill="#E7C9A0"/><rect x="146" y="76" width="44" height="7" fill="#4C8C3F"/>
+          <rect x="122" y="40" width="44" height="26" rx="4" fill="#EBD3B0"/><rect x="122" y="48" width="44" height="7" fill="#4C8C3F"/>
+          <path d="M198 70 h20 l-3 26 h-14 z" fill="#fff" stroke="#5B636B" stroke-width="1.5"/><rect x="199" y="74" width="18" height="6" fill="#8B5A3C"/>
+          <path d="M222 74 h16 l-2 22 h-12 z" fill="#fff" stroke="#5B636B" stroke-width="1.5"/>
+          <path d="M205 62 q4 -6 0 -12 M212 62 q4 -6 0 -12" stroke="#A7B0B6" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <rect x="172" y="10" width="78" height="26" rx="13" fill="#FF6B4A"/><text x="211" y="28" text-anchor="middle" font-family="Noto Sans KR" font-weight="700" font-size="12" fill="#fff">구독 -10%</text>
+        </svg>
+        <h3 class="display">회의·세미나 패키지</h3>
+        <p class="who">외부 손님 미팅, 워크숍, 교육 세미나에서<br>손에 묻지 않고 깔끔하게 먹을 수 있는 구성.</p>
+        <div class="tags"><span>개별 포장</span><span>시간 지정 배송</span><span>10~200명</span><span>음료·다과 추가</span></div>
+        <a href="#contact" class="btn btn-primary" data-cta="pkg-meeting" data-plan="회의·세미나 패키지">회의 패키지 문의 →</a>
+      </div>
+      <div class="menu-list">
+        <div class="menu-item"><div><b>프리미엄 샌드위치 박스</b><span>샌드위치 + 샐러드 + 음료</span></div><div class="p">12,000원~</div></div>
+        <div class="menu-item"><div><b>VIP 한정식 도시락</b><span>외부 손님 응대용 고급 도시락</span></div><div class="p">22,000원~</div></div>
+        <div class="menu-item"><div><b>커피 &amp; 디저트 브레이크</b><span>세미나 쉬는 시간용 다과 세트</span></div><div class="p">6,500원~</div></div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-night" role="tabpanel">
+      <div>
+        <svg class="pkg-ill" viewBox="0 0 260 150" role="img" aria-label="밤 사무실 책상 위 김이 나는 저녁 도시락과 스탠드, 구독 고객 10% 할인 배지">
+          <rect width="260" height="150" rx="16" fill="#1F2A44"/>
+          <circle cx="50" cy="40" r="18" fill="#FFE08A"/><circle cx="59" cy="34" r="16" fill="#1F2A44"/>
+          <g fill="#fff"><circle cx="104" cy="24" r="1.8"/><circle cx="148" cy="40" r="1.5"/><circle cx="92" cy="54" r="1.2"/><circle cx="20" cy="76" r="1.4"/></g>
+          <rect x="112" y="58" width="30" height="52" fill="#2E3B5C"/><rect x="146" y="46" width="26" height="64" fill="#34436A"/>
+          <g fill="#FFE08A"><rect x="118" y="66" width="6" height="6"/><rect x="130" y="80" width="6" height="6"/><rect x="152" y="56" width="6" height="6"/><rect x="162" y="72" width="6" height="6"/><rect x="118" y="92" width="6" height="6"/></g>
+          <path d="M0 110 H260 V134 a16 16 0 0 1 -16 16 H16 a16 16 0 0 1 -16 -16 Z" fill="#4A3B33"/>
+          <path d="M178 62 L150 110 H230 Z" fill="#FFE08A" opacity=".18"/>
+          <path d="M214 110 v-44 l-24 -12" stroke="#A7B0B6" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M170 52 l26 -8 l5 16 z" fill="#FFB800"/>
+          <rect x="34" y="92" width="86" height="22" rx="6" fill="#4C8C3F"/><rect x="38" y="85" width="78" height="10" rx="4" fill="#fff"/>
+          <path d="M56 78 q5 -7 0 -14 M76 78 q5 -7 0 -14 M96 78 q5 -7 0 -14" stroke="#fff" stroke-width="2" fill="none" opacity=".75" stroke-linecap="round"/>
+          <rect x="172" y="10" width="78" height="26" rx="13" fill="#FF6B4A"/><text x="211" y="28" text-anchor="middle" font-family="Noto Sans KR" font-weight="700" font-size="12" fill="#fff">구독 -10%</text>
+        </svg>
+        <h3 class="display">야근 식대 패키지</h3>
+        <p class="who">마감·런칭 시즌, 야근하는 팀원들에게<br>회사가 챙겨주는 든든한 저녁 한 끼.</p>
+        <div class="tags"><span>1인 식대 한도 설정</span><span>개인 자유 주문</span><span>회사 일괄 결제</span><span>18~22시</span></div>
+        <a href="#contact" class="btn btn-primary" data-cta="pkg-night" data-plan="야근 식대 패키지">야근 패키지 문의 →</a>
+      </div>
+      <div class="menu-list">
+        <div class="menu-item"><div><b>야근 식대 카드</b><span>1인 한도 내 배달의 마을 메뉴 자유 주문, 회사 결제</span></div><div class="p">한도 자유 설정</div></div>
+        <div class="menu-item"><div><b>든든 저녁 도시락</b><span>팀 단위 일괄 주문, 지정 시간 배송</span></div><div class="p">10,000원~</div></div>
+        <div class="menu-item"><div><b>야식 &amp; 간식 박스</b><span>밤 10시 이후 출출할 때</span></div><div class="p">7,000원~</div></div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-event" role="tabpanel">
+      <div>
+        <svg class="pkg-ill" viewBox="0 0 260 150" role="img" aria-label="사내 행사용 케이크와 풍선, 핑거푸드 접시, 구독 고객 10% 할인 배지">
+          <rect width="260" height="150" rx="16" fill="#FFF1EC"/>
+          <path d="M38 58 q4 20 -2 40" stroke="#A7B0B6" stroke-width="1.5" fill="none"/><ellipse cx="38" cy="40" rx="14" ry="18" fill="#4C8C3F"/>
+          <path d="M64 48 q-4 22 4 40" stroke="#A7B0B6" stroke-width="1.5" fill="none"/><ellipse cx="64" cy="30" rx="13" ry="17" fill="#FF6B4A"/>
+          <g><rect x="100" y="20" width="6" height="3" fill="#FFB800" transform="rotate(30 103 21)"/><rect x="150" y="30" width="6" height="3" fill="#4C8C3F" transform="rotate(-20 153 31)"/><rect x="88" y="44" width="6" height="3" fill="#FF6B4A" transform="rotate(60 91 45)"/><rect x="168" y="50" width="6" height="3" fill="#7C6CF2"/><circle cx="126" cy="18" r="2.5" fill="#7C6CF2"/><circle cx="200" cy="56" r="2.5" fill="#FFB800"/></g>
+          <ellipse cx="130" cy="122" rx="54" ry="7" fill="#E4E8EB"/>
+          <rect x="94" y="80" width="72" height="40" rx="6" fill="#fff" stroke="#F3C6B8" stroke-width="2"/>
+          <rect x="104" y="60" width="52" height="24" rx="6" fill="#FFD6CC"/>
+          <path d="M104 70 q6 8 12 0 q6 8 12 0 q6 8 14 0 q6 8 14 0" stroke="#fff" stroke-width="3" fill="none"/>
+          <rect x="94" y="96" width="72" height="6" fill="#4C8C3F"/>
+          <rect x="118" y="46" width="4" height="14" fill="#4C8C3F"/><rect x="138" y="46" width="4" height="14" fill="#FF6B4A"/>
+          <ellipse cx="120" cy="42" rx="3" ry="5" fill="#FFB800"/><ellipse cx="140" cy="42" rx="3" ry="5" fill="#FFB800"/>
+          <ellipse cx="38" cy="124" rx="28" ry="6" fill="#E4E8EB"/><g fill="#F2B630"><circle cx="28" cy="118" r="6"/><circle cx="42" cy="116" r="6"/></g><circle cx="52" cy="120" r="5" fill="#4FAF5B"/>
+          <ellipse cx="222" cy="124" rx="28" ry="6" fill="#E4E8EB"/><g fill="#A55A35"><rect x="206" y="112" width="12" height="10" rx="3"/><rect x="222" y="110" width="12" height="10" rx="3"/></g><circle cx="240" cy="118" r="5" fill="#E5484D"/>
+          <rect x="172" y="10" width="78" height="26" rx="13" fill="#FF6B4A"/><text x="211" y="28" text-anchor="middle" font-family="Noto Sans KR" font-weight="700" font-size="12" fill="#fff">구독 -10%</text>
+        </svg>
+        <h3 class="display">사내 행사 패키지</h3>
+        <p class="who">창립기념일, 타운홀, 신규 입사자 환영회,<br>송년회까지. 세팅부터 정리까지 한 번에.</p>
+        <div class="tags"><span>케이터링 세팅</span><span>30~500명</span><span>현수막·데코 옵션</span><span>전담 매니저</span></div>
+        <a href="#contact" class="btn btn-primary" data-cta="pkg-event" data-plan="사내 행사 패키지">행사 패키지 문의 →</a>
+      </div>
+      <div class="menu-list">
+        <div class="menu-item"><div><b>핑거푸드 뷔페</b><span>스탠딩 행사용 한입 메뉴 12종</span></div><div class="p">18,000원~</div></div>
+        <div class="menu-item"><div><b>파티 도시락 &amp; 케이크</b><span>생일·기념일 축하 세트</span></div><div class="p">15,000원~</div></div>
+        <div class="menu-item"><div><b>송년회 케이터링</b><span>메인 요리 + 음료 + 세팅/철수</span></div><div class="p">30,000원~</div></div>
+      </div>
+    </div>
+    <div class="benefit-strip">
+      <span>🎁 첫 패키지 <b>무료 업그레이드</b></span>
+      <span>📦 구독 고객 <b>패키지 10% 할인</b></span>
+      <span>➕ 주문 금액별 <b>최대 10% 추가 할인</b></span>
+    </div>
+  </div>
+</section>
+
+<!-- 5. 이용 방법 -->
+<section class="alt">
+  <div class="wrap center">
+    <span class="eyebrow">HOW IT WORKS</span>
+    <h2 class="sec-title display">기존 계정 그대로, 3분이면 설정 끝</h2>
+    <p class="sec-desc">지금 쓰시는 배달의 마을 비즈니스 계정과 주문 기록을 그대로 이어서 씁니다.</p>
+    <div class="steps" style="text-align:left">
+      <div class="step"><h4>상담 신청</h4><p>인원·요일·예산만 남겨주시면 담당 매니저가 연락드려요.</p></div>
+      <div class="step"><h4>맞춤 식단 제안</h4><p>지난 주문 기록을 분석해 팀이 좋아할 메뉴로 첫 주 식단을 짜드려요.</p></div>
+      <div class="step"><h4>자동 배송 시작</h4><p>매일 정해진 시간에 도착. 인원 변동은 앱에서 바로 수정.</p></div>
+      <div class="step"><h4>월말 일괄 정산</h4><p>세금계산서 한 장으로 끝. 부서별 사용 리포트도 함께.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. 기존 고객 전용 혜택 (리텐션 핵심) -->
+<section id="benefit">
+  <div class="wrap">
+    <div class="loyal">
+      <div>
+        <span class="eyebrow">ONLY FOR YOU · 기존 고객 전용</span>
+        <h2 class="sec-title display">그동안 배달의 마을과 함께해 주셔서<br>감사의 혜택을 준비했어요</h2>
+        <p class="sec-desc">단체 주문 이력이 있는 기업 고객만 받을 수 있는 혜택입니다. 이번 달 신청 시 자동 적용됩니다.</p>
+        <a href="#contact" class="btn btn-primary sec-cta" data-cta="benefit">이 혜택 그대로 신청하기 →</a>
+      </div>
+      <div class="perks">
+        <div class="perk"><span class="big">20%</span><b>첫 달 구독 할인</b><span>정기구독 전환 고객 전원</span></div>
+        <div class="perk"><span class="big">10%</span><b>구독 고객 패키지 할인</b><span>회의·야근·행사 패키지 상시</span></div>
+        <div class="perk"><span class="big">UP</span><b>첫 패키지 무료 업그레이드</b><span>회의·야근·행사 중 1회</span></div>
+        <div class="perk"><span class="big">2배</span><b>주문 포인트 적립</b><span>구독 유지 3개월 이상 시</span></div>
+        <div class="perk"><span class="big">FREE</span><b>담당자 감사 쿠폰</b><span>주문 담당자님께 매월 커피 쿠폰</span></div>
+        <div class="perk"><span class="big">정시</span><b>도착 보장</b><span>지연 시 해당 회차 10% 환급 (스탠다드↑)</span></div>
+        <div class="tiers">
+          <b>💰 많이 주문할수록 더 깎아드려요 · 금액대별 추가 할인</b>
+          <span>1회 주문 금액 기준, 위 혜택과 중복 적용됩니다.</span>
+          <div class="tier-row">
+            <div class="tier"><small>5만 원 이상</small><strong>+3%</strong></div>
+            <div class="tier"><small>10만 원 이상</small><strong>+5%</strong></div>
+            <div class="tier"><small>20만 원 이상</small><strong>+10%</strong></div>
+          </div>
+          <div class="tier-axis" aria-hidden="true"><span>1회 주문 금액 →</span><span>할인율 ↑</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. 비용 절감 계산기 -->
+<section class="alt">
+  <div class="wrap center">
+    <span class="eyebrow">CALCULATOR</span>
+    <h2 class="sec-title display">우리 팀은 얼마나 아낄 수 있을까?</h2>
+    <p class="sec-desc">지금처럼 매번 단건 주문할 때와 정기구독으로 바꿨을 때를 비교해 보세요.</p>
+    <div class="calc" style="text-align:left">
+      <div>
+        <div class="field">
+          <label for="people">팀 인원 <output id="peopleOut">15명</output></label>
+          <input type="range" id="people" min="5" max="100" value="15">
+        </div>
+        <div class="field">
+          <label>주 몇 회 드시나요?</label>
+          <div class="seg" id="days">
+            <button type="button" data-v="3">주 3회</button>
+            <button type="button" data-v="5" class="on">주 5회</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="cur">지금 1인 평균 식비 (배달비 포함) <output id="curOut">11,000원</output></label>
+          <input type="range" id="cur" min="8000" max="16000" step="500" value="11000">
+        </div>
+      </div>
+      <div class="result">
+        <div class="row"><span>지금 월 식비</span><b id="rNow">-</b></div>
+        <div class="row"><span>구독가 적용</span><b id="rSub">-</b></div>
+        <div class="row"><span>금액대별 추가 할인 <small id="rTierLbl"></small></span><b id="rTier">-</b></div>
+        <div class="row"><span>담당자 주문 업무 절감</span><b id="rTime">-</b></div>
+        <div class="save">매달 아끼는 금액<b id="rSave">-</b></div>
+        <div class="first-row">🎁 첫 달은 20% 더 할인 → 첫 달 예상 <b id="rFirst">-</b></div>
+        <a href="#contact" class="btn btn-primary sec-cta" data-cta="calc">이 조건으로 견적 받기 →</a>
+      </div>
+    </div>
+    <p class="note">* 월 4.3주 기준 추정치. 금액대별 할인은 1회 주문 금액(인원 × 1식 구독가) 기준으로 반영됩니다.</p>
+  </div>
+</section>
+
+<!-- 8. 고객 후기 (예시 - 실제 후기로 교체 필요) -->
+<section>
+  <div class="wrap center">
+    <span class="eyebrow">REVIEW</span>
+    <h2 class="sec-title display">먼저 구독한 팀들의 이야기</h2>
+    <div class="reviews" style="text-align:left">
+      <div class="review"><div class="stars">★★★★★</div><p>"매일 아침 단톡방에서 메뉴 투표하던 게 사라졌어요. 총무 업무 중 제일 귀찮던 일이었는데 이제 신경 안 써도 됩니다."</p><div class="by"><b>IT 스타트업 A사</b> · 경영지원 담당 · 24명</div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"런칭 주간에 야근 식대 패키지 썼는데, 팀원들이 각자 먹고 싶은 걸 고를 수 있어서 반응이 제일 좋았어요."</p><div class="by"><b>마케팅 에이전시 B사</b> · 팀장 · 12명</div></div>
+      <div class="review"><div class="stars">★★★★☆</div><p>"외부 고객사 세미나 때 회의 패키지로 준비했는데 포장이 깔끔해서 손님들이 먼저 어디 거냐고 물어보셨어요."</p><div class="by"><b>제조업 C사</b> · 교육 담당 · 80명</div></div>
+    </div>
+    <p class="note">* 예시 후기입니다. 게시 전 실제 고객 후기로 교체하세요.</p>
+  </div>
+</section>
+
+<!-- 9. FAQ -->
+<section class="alt" id="faq">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="sec-title display">자주 묻는 질문</h2>
+    </div>
+    <div class="faq">
+      <details><summary>지금 쓰는 배달의 마을 계정을 그대로 쓸 수 있나요?</summary><p>네. 기존 배달의 마을 비즈니스(또는 단체 주문) 계정에 구독만 추가됩니다. 주문 기록과 즐겨찾는 가게도 그대로 유지돼요.</p></details>
+      <details><summary>인원이 매일 달라지면 어떻게 하나요?</summary><p>배송 전날 오후 3시까지 앱에서 인원을 수정하시면 그만큼만 청구됩니다. 휴가·외근이 많은 팀도 부담 없어요.</p></details>
+      <details><summary>약정 기간이 있나요? 중간에 해지할 수 있나요?</summary><p>약정은 없습니다. 다음 달 구독 시작 7일 전까지 해지 신청하시면 위약금 없이 해지됩니다.</p></details>
+      <details><summary>세금계산서는 어떻게 발행되나요?</summary><p>매월 1회, 한 달 동안의 구독 및 패키지 이용 내역을 합산해 세금계산서를 일괄 발행합니다. 부서별 분리 발행도 가능합니다.</p></details>
+      <details><summary>알레르기나 비건 메뉴도 가능한가요?</summary><p>스탠다드 플랜 이상에서 팀원별 식단 옵션(비건, 저염, 특정 알레르기 제외)을 설정할 수 있습니다.</p></details>
+      <details><summary>금액대별 추가 할인은 어떻게 적용되나요?</summary><p>1회 주문 금액이 5만 원 이상이면 3%, 10만 원 이상이면 5%, 20만 원 이상이면 10%가 추가로 할인됩니다. 정기 구독, 상황별 패키지 모두 적용되며 첫 달 20% 할인과도 중복됩니다.</p></details>
+      <details><summary>상황별 패키지만 따로 이용할 수 있나요?</summary><p>네, 구독 없이 단건으로도 이용 가능합니다. 다만 구독 고객은 패키지 10% 추가 할인이 적용됩니다.</p></details>
+      <div class="center"><a href="#contact" class="btn btn-ghost sec-cta" data-cta="faq">더 궁금한 점은 상담으로 →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. 상담 신청 (최종 전환) -->
+<section id="contact">
+  <div class="wrap">
+    <div class="cta-box">
+      <div>
+        <span class="eyebrow" style="color:#fff;opacity:.85">LAST STEP</span>
+        <h2 class="sec-title display">이번 달 안에 신청하면<br>첫 달 20% + 최대 10% 추가 할인</h2>
+        <p>담당 매니저가 1영업일 안에 연락드려 우리 팀 맞춤 식단과 견적을 안내해 드립니다. 아래 혜택은 자동 적용됩니다.</p>
+        <ul>
+          <li>첫 달 구독 20% 할인</li>
+          <li>1회 주문 5만·10만·20만 원 이상 3·5·10% 추가 할인</li>
+          <li>구독 고객 패키지 10% 할인 + 첫 패키지 무료 업그레이드</li>
+          <li>3개월 이상 포인트 2배 · 담당자 커피 쿠폰</li>
+          <li>약정 없음, 상담·견적 무료</li>
+        </ul>
+      </div>
+      <div>
+        <form id="leadForm" novalidate>
+          <p class="demo-note">시안용 폼입니다. 입력한 내용은 어디에도 전송되지 않으니 실제 정보를 넣지 마세요.</p>
+          <div class="two">
+            <label>회사명<input name="company" required placeholder="예) 마을상사"></label>
+            <label>담당자명<input name="name" required placeholder="홍길동"></label>
+          </div>
+          <label>연락처<input name="phone" type="tel" required placeholder="010-0000-0000"></label>
+          <div class="two">
+            <label>인원<select name="size"><option>5~19명</option><option selected>20~49명</option><option>50~99명</option><option>100명 이상</option></select></label>
+            <label>관심 서비스<select name="plan" id="planSelect"><option>정기 구독 (미정)</option><option>라이트</option><option>스탠다드</option><option>엔터프라이즈</option><option>회의·세미나 패키지</option><option>야근 식대 패키지</option><option>사내 행사 패키지</option></select></label>
+          </div>
+          <label class="agree"><input type="checkbox" name="agree" required> 개인정보 수집·이용에 동의합니다 (필수)</label>
+          <button class="btn btn-primary" type="submit" data-cta="form-submit">혜택 적용하고 상담 신청</button>
+        </form>
+        <div class="form-done" id="formDone" style="background:#fff;color:#1F2328;border-radius:22px">
+          <b>신청 완료 화면 (시안) 🎉</b>
+          <p>실제 서비스라면 이 화면이 보입니다.<br>시안이므로 입력한 정보는 전송되지 않았습니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>배달의 마을 오피스런치 · 학습용 가상 브랜드 마케팅 랜딩 페이지 시안</p>
+    <p>본 페이지의 가격·혜택·후기는 기획용 예시이며 실제 운영 정책과 다를 수 있습니다.</p>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <div class="sticky-note">첫 달 <b>20%</b> + 주문 금액별 최대 <b>10%</b> 추가 할인</div>
+  <a href="#packages" class="btn btn-ghost" data-cta="sticky-packages">패키지</a>
+  <a href="#contact" class="btn btn-primary" data-cta="sticky">할인 받고 신청</a>
+</div>
+
+<script>
+  // 유입 채널(utm_source)별 맞춤 문구
+  const CHANNEL_COPY = {
+    // bar 뒤에는 공통 혜택 문구(첫 달 20% + 금액별 최대 10%)가 항상 붙음
+    subway:    { bar: '🚇 출근길 QR 고객님', badge: '출근길, 오늘 점심 고민은 여기서 끝' },
+    bus:       { bar: '🚌 버스 광고 보고 오신 고객님', badge: '매일 도시락 주문하던 팀이라면' },
+    facebook:  { bar: '🍱 <b>기존 오피스 고객 전용</b>', badge: '총무·경영지원 담당자님을 위한' },
+    instagram: { bar: '🍱 피드 속 그 도시락', badge: '팀원들이 먼저 좋아하는 점심' },
+    threads:   { bar: '🧵 스레드 고객님', badge: '"오늘 뭐 먹지" 단톡방 졸업' },
+    youtube:   { bar: '▶️ 영상 속 그 서비스', badge: '영상에서 본 그 오피스런치' },
+    community: { bar: '💬 커뮤니티 회원님', badge: '직장인 커뮤니티 추천' }
+  };
+  const params = new URLSearchParams(location.search);
+  const src = (params.get('utm_source') || '').toLowerCase();
+  if (CHANNEL_COPY[src]) {
+    document.getElementById('channelBar').innerHTML = CHANNEL_COPY[src].bar;
+    document.getElementById('heroBadge').textContent = CHANNEL_COPY[src].badge;
+  }
+
+  // CTA 클릭 트래킹 (GA4/픽셀 연동 지점)
+  document.querySelectorAll('[data-cta]').forEach(el => {
+    el.addEventListener('click', () => {
+      const plan = el.dataset.plan;
+      if (plan) {
+        const sel = document.getElementById('planSelect');
+        [...sel.options].forEach(o => { if (o.text.startsWith(plan)) sel.value = o.value; });
+      }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'cta_click', cta: el.dataset.cta, utm_source: src || 'direct' });
+    });
+  });
+
+  // 하단 고정 CTA: 히어로 CTA나 신청 폼이 보일 때는 숨김 (중복 노출 방지)
+  const sticky = document.querySelector('.sticky-cta');
+  const visible = new Set();
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
+    sticky.classList.toggle('hide', visible.size > 0);
+  });
+  [document.querySelector('.hero-cta'), document.getElementById('contact')].forEach(el => io.observe(el));
+
+  // 패키지 탭
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', 'false'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      tab.setAttribute('aria-selected', 'true');
+      document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  // 비용 계산기
+  const SUB_PRICE = { 3: 8900, 5: 8300 };
+  const won = n => Math.round(n).toLocaleString('ko-KR') + '원';
+  let days = 5;
+  function calc() {
+    const people = +document.getElementById('people').value;
+    const cur = +document.getElementById('cur').value;
+    document.getElementById('peopleOut').textContent = people + '명';
+    document.getElementById('curOut').textContent = cur.toLocaleString('ko-KR') + '원';
+    const meals = people * days * 4.3;
+    const order = people * SUB_PRICE[days]; // 1회 주문 금액
+    const tier = order >= 200000 ? .10 : order >= 100000 ? .05 : order >= 50000 ? .03 : 0;
+    const now = meals * cur, base = meals * SUB_PRICE[days], sub = base * (1 - tier);
+    document.getElementById('rNow').textContent = won(now);
+    document.getElementById('rSub').textContent = won(base);
+    document.getElementById('rTierLbl').textContent = tier ? `(1회 ${Math.floor(order / 10000)}만 원 → ${tier * 100}%)` : '(1회 5만 원 미만)';
+    document.getElementById('rTier').textContent = tier ? '−' + won(base * tier) : '0원';
+    document.getElementById('rTime').textContent = '월 약 ' + Math.round(days * 4.3 * 0.5) + '시간';
+    document.getElementById('rSave').textContent = won(Math.max(0, now - sub));
+    document.getElementById('rFirst').textContent = won(sub * .8);
+  }
+  document.getElementById('people').addEventListener('input', calc);
+  document.getElementById('cur').addEventListener('input', calc);
+  document.querySelectorAll('#days button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('#days button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on'); days = +b.dataset.v; calc();
+  }));
+  calc();
+
+  // 상담 폼 (실서비스에서는 CRM/서버 API로 전송)
+  document.getElementById('leadForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const f = e.target;
+    if (!f.checkValidity()) { f.reportValidity(); return; }
+    f.style.display = 'none';
+    document.getElementById('formDone').style.display = 'block';
+  });
+</script>
+</body>
+</html>

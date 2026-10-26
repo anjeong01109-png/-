@@ -5,6 +5,7 @@
 
 ## 학습용 가상 브랜드
 - [가상 배달앱 브랜드 "배달의 마을" 콘텐츠 전략 v1](drafts/baedal-maeul-brand-v1.html)
+- [배달의 마을 오피스런치 랜딩 페이지 시안](landing/baedal-maeul-office-lunch.html)
 
 ## 짜파게티
 - [GEO 콘텐츠 기획안 (15편)](drafts/jjapaghetti-content-plan-v1.html)
