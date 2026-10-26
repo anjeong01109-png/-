@@ -1,14 +1,15 @@
 ﻿<#
   호빵 계절별 검색 추이 분석 (NAVER API HUB 데이터랩 검색어 트렌드 + 블로그 검색)
   결과: output\호빵\<날짜_시각>\ 아래 CSV(엑셀용, UTF-8 BOM)와 API 원본 응답(raw\*.json)
-  API 키: secrets\naver.json
+  API 키: .env (tools\load-env.ps1로 읽음)
 #>
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [Text.Encoding]::UTF8
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 $root = Split-Path $PSScriptRoot -Parent
-$config = Get-Content (Join-Path $root 'secrets\naver.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+. (Join-Path $root 'tools\load-env.ps1')
+$config = Get-NaverConfig $root
 $headers = @{ 'X-NCP-APIGW-API-KEY-ID' = $config.clientId; 'X-NCP-APIGW-API-KEY' = $config.clientSecret }
 $outDir = Join-Path $root ('output\호빵\' + (Get-Date).ToString('yyyyMMdd_HHmm'))
 $rawDir = Join-Path $outDir 'raw'

@@ -6,7 +6,7 @@
     .\naver-topic.ps1 -Topic "홈카페" -Compare "캠핑","러닝" -Months 24 -Count 20
 
   결과: output\<주제>\<날짜_시각>\report.md (사람이 읽는 리포트), raw.json (원본 데이터)
-  API 키: secrets\naver.json
+  API 키: .env (tools\load-env.ps1로 읽음)
 #>
 param(
     [string]$Topic,
@@ -23,7 +23,8 @@ if (-not $Topic) { $Topic = Read-Host '리서치할 주제를 입력하세요' }
 if (-not $Topic) { throw '주제가 비어 있습니다.' }
 
 $root = Split-Path $PSScriptRoot -Parent   # 프로젝트 폴더 (tools의 한 단계 위)
-$config = Get-Content (Join-Path $root 'secrets\naver.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+. (Join-Path $root 'tools\load-env.ps1')
+$config = Get-NaverConfig $root
 $headers = @{
     'X-NCP-APIGW-API-KEY-ID' = $config.clientId
     'X-NCP-APIGW-API-KEY'    = $config.clientSecret

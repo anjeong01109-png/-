@@ -3,14 +3,15 @@
 
   사용 예:  .\xexymix-andar-analysis.ps1
   결과: output\젝시믹스_vs_안다르\<날짜_시각>\ 아래 CSV(엑셀용, UTF-8 BOM)와 API 원본 응답(raw\*.json)
-  API 키: secrets\naver.json
+  API 키: .env (tools\load-env.ps1로 읽음)
 #>
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [Text.Encoding]::UTF8
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 $root = Split-Path $PSScriptRoot -Parent
-$config = Get-Content (Join-Path $root 'secrets\naver.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+. (Join-Path $root 'tools\load-env.ps1')
+$config = Get-NaverConfig $root
 $headers = @{ 'X-NCP-APIGW-API-KEY-ID' = $config.clientId; 'X-NCP-APIGW-API-KEY' = $config.clientSecret }
 $now = Get-Date
 $outDir = Join-Path $root ('output\젝시믹스_vs_안다르\' + $now.ToString('yyyyMMdd_HHmm'))

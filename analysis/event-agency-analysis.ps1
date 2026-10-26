@@ -10,14 +10,15 @@
         trend_monthly.csv      월별 검색 지수 (기준 키워드로 환산)
         news_items.csv         대행사 이름이 들어간 최근 12개월 뉴스 목록
         raw\*.json             요청 내용과 응답 원문
-  API 키: secrets\naver.json
+  API 키: .env (tools\load-env.ps1로 읽음)
 #>
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [Text.Encoding]::UTF8
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 $root = Split-Path $PSScriptRoot -Parent
-$config = Get-Content (Join-Path $root 'secrets\naver.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+. (Join-Path $root 'tools\load-env.ps1')
+$config = Get-NaverConfig $root
 $headers = @{
     'X-NCP-APIGW-API-KEY-ID' = $config.clientId
     'X-NCP-APIGW-API-KEY'    = $config.clientSecret
